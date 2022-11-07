@@ -10,7 +10,7 @@ public class StudentService {
 
     public List<Student> getStudents() {
         return List.of(
-                new Student(1L, "ginni", 22, LocalDate.of(2000, 3, 12), "nandginni@gmail.com")
+                new Student("ginni", "nand", 22, "nandginni@gmail.com", LocalDate.of(2000, 3, 12))
         );
     }
 }
