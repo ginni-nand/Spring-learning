@@ -57,6 +57,9 @@ public class Student {
         return id;
     }
 
+    public Student() {
+    }
+
     public Student(String firstName, String lastName, Integer age, String email, LocalDate dob) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -72,8 +75,8 @@ public class Student {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", age=" + age + '\'' +
-                ", email=" + email + '\''+
-                ", dob="+ dob +
+                ", email=" + email + '\'' +
+                ", dob=" + dob +
                 '}';
     }
 
