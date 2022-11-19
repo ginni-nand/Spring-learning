@@ -1,3 +1,4 @@
+/*
 package com.example.demo.security;
 
 import org.springframework.context.annotation.Bean;
@@ -25,3 +26,4 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         return new InMemoryUserDetailsManager(Ginni);
     }
 }
+*/
