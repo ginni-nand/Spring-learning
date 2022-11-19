@@ -2,6 +2,7 @@ package com.example.demo.user.service;
 
 import com.example.demo.user.domain.Role;
 import com.example.demo.user.domain.User;
+import com.example.demo.user.exception.NoSuchUserFound;
 import com.example.demo.user.repository.RoleRepository;
 import com.example.demo.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -42,12 +43,21 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUser(String userName) {
         log.info("fetching user {}", userName);
-        return userRepository.findByUsername(userName);
+        User user = userRepository.findByUsername(userName);
+        if (user != null)
+            return user;
+        else throw new NoSuchUserFound("No user with exist with name " + userName);
     }
 
     @Override
     public List<User> getAllUser() {
         log.info("fetching all users");
         return userRepository.findAll();
+    }
+
+    @Override
+    public List<Role> getAllRoles() {
+        log.info("fetching all roles");
+        return roleRepository.findAll();
     }
 }
