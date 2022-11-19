@@ -4,7 +4,6 @@ import com.example.demo.user.domain.Role;
 import com.example.demo.user.domain.User;
 import com.example.demo.user.service.UserService;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +11,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -34,6 +34,14 @@ public class UserResource {
         return ResponseEntity.created(uri).body(userService.saveUser(user));
     }
 
+    @GetMapping("/user/{username}")
+    public ResponseEntity<User> getUserByName(@PathVariable String username) {
+        return Optional
+                .ofNullable(userService.getUser(username))
+                .map(user -> ResponseEntity.ok().body(user))          //200 OK
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
     @PostMapping("/role/save")
     public ResponseEntity<Role> saveRole(@RequestBody Role role) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/role/save").toUriString());
@@ -44,6 +52,11 @@ public class UserResource {
     public ResponseEntity<?> addRoleToUser(@RequestBody RoleToUser form) {
         userService.addRoleToUser(form.getUsername(), form.getRoleName());
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/role")
+    public ResponseEntity<List<Role>> getAllRoles() {
+        return ResponseEntity.ok().body(userService.getAllRoles());
     }
 
 }
