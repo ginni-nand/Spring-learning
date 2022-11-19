@@ -5,6 +5,7 @@ import com.example.demo.user.domain.User;
 import com.example.demo.user.service.UserService;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -14,9 +15,13 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
-@RequiredArgsConstructor
 public class UserResource {
     private UserService userService;
+
+    @Autowired
+    public UserResource(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/user")
     public ResponseEntity<List<User>> getUsers() {

@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Role {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "rid")
     private Long id;
     private String name;
