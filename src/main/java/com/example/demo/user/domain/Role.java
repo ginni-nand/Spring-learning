@@ -15,7 +15,6 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "rid")
     private Long id;
+    @Column(unique=true)
     private String name;
-
-
 }
